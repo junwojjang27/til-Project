@@ -4,7 +4,7 @@
 요구사항은 docs/SPEC.md가 기준이고, 명세에 없는 기능은 만들기 전에 먼저 묻는다.
 
 ## 기술 스택
-- Java 17, Spring Boot 3.x, Maven Wrapper(mvnw)
+- Java 17, Spring Boot 4.0.x, Maven Wrapper(mvnw)
 - MyBatis(XML 매퍼), H2 인메모리 DB
 - 화면: src/main/resources/static/index.html 한 장, 순수 JavaScript(fetch). 프론트엔드 프레임워크는 쓰지 않는다
 - 테스트: JUnit 5, MockMvc
@@ -31,3 +31,4 @@
 - 기능 하나 단위로 진행한다: 계획 → 구현 → 테스트 작성 → ./mvnw test 통과
 - 테스트가 실패하면 테스트를 고치기 전에 구현이 명세와 맞는지 먼저 확인한다
 - 커밋은 사용자가 /commit을 실행할 때만 한다. 스스로 커밋하지 않는다
+- 명세나 CLAUDE.md와 다르게 진행해야 할 상황이면 멈추고 먼저 묻는다
