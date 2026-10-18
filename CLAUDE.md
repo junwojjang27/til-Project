@@ -4,7 +4,7 @@
 요구사항은 docs/SPEC.md가 기준이고, 명세에 없는 기능은 만들기 전에 먼저 묻는다.
 
 ## 기술 스택
-- Java 17, Spring Boot 4.0.x, Maven Wrapper(mvnw)
+- Java 17, Spring Boot 4.0.8, Maven Wrapper(mvnw)
 - MyBatis(XML 매퍼)
 - DB: 실행은 MySQL 8.x(local 프로파일), 테스트는 H2 인메모리 MySQL 호환 모드(기본 프로파일)
 - 접속 정보는 application-local.yml에 두고 커밋하지 않는다
@@ -27,7 +27,8 @@
 - 에러 응답은 {"message": "..."} 형식으로 통일하고 @RestControllerAdvice에서 처리한다
 - 화면에서 사용자 입력을 출력할 때는 textContent를 쓴다. innerHTML에 사용자 입력을 넣지 않는다
 - 주석과 커밋 메시지는 한국어로 쓴다
-- 새 의존성을 추가하기 전에 이유를 설명하고 승인을 받는다
+- 새 의존성을 추가하거나 기존 의존성·프레임워크의 버전을 바꾸기 전에 이유를 설명하고 승인을 받는다
+- 리소스를 찾지 못한 경우에는 `NoSuchElementException` 같은 자바 기본 예외를 쓰지 않는다. 프로젝트 전용 예외(예: `TilNotFoundException`)를 만들어 `@RestControllerAdvice`에서 404로 매핑한다
 
 ## Spring Boot 4 주의사항
 
@@ -61,6 +62,8 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 
 ## 작업 방식
 - 기능 하나 단위로 진행한다: 계획 → 구현 → 테스트 작성 → ./mvnw test 통과
+- 계획을 제시할 때는 이번 작업의 범위(생성·수정·삭제할 파일 목록)를 명시하고, 요청에 없던 파일이나 기능이 포함되면 진행 전에 이유를 설명하고 승인을 받는다
+- 테스트 데이터 격리는 `@Transactional`(롤백) 방식으로 통일한다. 격리 방식을 바꿔야 할 이유가 생기면 먼저 묻는다
 - 테스트가 실패하면 테스트를 고치기 전에 구현이 명세와 맞는지 먼저 확인한다
 - 커밋은 사용자가 /commit을 실행할 때만 한다. 스스로 커밋하지 않는다
 - 명세나 CLAUDE.md와 다르게 진행해야 할 상황이면 멈추고 먼저 묻는다
