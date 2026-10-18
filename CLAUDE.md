@@ -5,7 +5,9 @@
 
 ## 기술 스택
 - Java 17, Spring Boot 4.0.x, Maven Wrapper(mvnw)
-- MyBatis(XML 매퍼), H2 인메모리 DB
+- MyBatis(XML 매퍼)
+- DB: 실행은 MySQL 8.x(local 프로파일), 테스트는 H2 인메모리 MySQL 호환 모드(기본 프로파일)
+- 접속 정보는 application-local.yml에 두고 커밋하지 않는다
 - 화면: src/main/resources/static/index.html 한 장, 순수 JavaScript(fetch). 프론트엔드 프레임워크는 쓰지 않는다
 - 테스트: JUnit 5, MockMvc
 

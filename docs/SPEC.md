@@ -28,6 +28,12 @@ TIL
 - TAG: VARCHAR(50), NULL 허용
 - CREATED_AT: TIMESTAMP, NOT NULL, 기본값 현재 시각
 
+## DB 구성
+- 실행(local 프로파일): MySQL 8.x, localhost:3306, DB명 til
+- 테스트(기본 프로파일): H2 인메모리, MySQL 호환 모드
+- 접속 정보: application-local.yml (gitignore 대상, 커밋 금지)
+- 테이블 DDL: src/main/resources/schema.sql (두 환경 모두 공용)
+
 ## 화면
 index.html 한 장. 위쪽에 작성 폼, 아래쪽에 목록.
 검증 실패 시 서버가 준 message를 폼 아래에 보여준다.
