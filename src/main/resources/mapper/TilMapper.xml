@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.til.mapper.TilMapper">
+
+    <select id="findAll" resultType="com.example.til.domain.Til">
+        SELECT ID, TITLE, TAG, CREATED_AT
+        FROM TIL
+        ORDER BY CREATED_AT DESC, ID DESC
+    </select>
+
+    <select id="findById" resultType="com.example.til.domain.Til">
+        SELECT ID, TITLE, CONTENT, TAG, CREATED_AT
+        FROM TIL
+        WHERE ID = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.example.til.domain.Til"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO TIL (TITLE, CONTENT, TAG)
+        VALUES (#{title}, #{content}, #{tag})
+    </insert>
+
+    <delete id="deleteById">
+        DELETE FROM TIL WHERE ID = #{id}
+    </delete>
+
+</mapper>

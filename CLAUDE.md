@@ -29,6 +29,36 @@
 - 주석과 커밋 메시지는 한국어로 쓴다
 - 새 의존성을 추가하기 전에 이유를 설명하고 승인을 받는다
 
+## Spring Boot 4 주의사항
+
+Spring Boot 4.x는 3.x와 패키지 구조가 달라진 부분이 있다. 아래는 실제 컴파일 오류를 겪고 확인한 내용이다.
+
+### Jackson 3.x 패키지 변경
+Jackson 3.x부터 기본 패키지가 `com.fasterxml.jackson` → `tools.jackson`으로 바뀌었다.
+
+```java
+// Spring Boot 4.x (Jackson 3.x) — 올바른 import
+import tools.jackson.databind.ObjectMapper;
+
+// Spring Boot 3.x (Jackson 2.x) — 이 패키지는 더 이상 기본이 아님
+// import com.fasterxml.jackson.databind.ObjectMapper;
+```
+
+단, `com.fasterxml.jackson.core:jackson-annotations`는 여전히 `com.fasterxml.jackson.core` 패키지를 쓴다.
+
+### MockMvc 테스트 어노테이션 패키지 변경
+`@AutoConfigureMockMvc`가 `spring-boot-webmvc-test` 모듈로 분리됐다.
+
+```java
+// Spring Boot 4.x — 올바른 import
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+
+// Spring Boot 3.x — 이 경로는 SB4에 없음
+// import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+```
+
+`@WebMvcTest` 슬라이스도 같은 패키지에 있다.
+
 ## 작업 방식
 - 기능 하나 단위로 진행한다: 계획 → 구현 → 테스트 작성 → ./mvnw test 통과
 - 테스트가 실패하면 테스트를 고치기 전에 구현이 명세와 맞는지 먼저 확인한다
